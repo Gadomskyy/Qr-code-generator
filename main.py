@@ -12,7 +12,7 @@ def qr_code_generation(text):
     )
     qr.add_data(text)
     img = qr.make_image(fill_color="black", back_color="white")
-    img.save(f'QR_Code_{curr_date.year, curr_date.month, curr_date.day, curr_date.hour, curr_date.minute, curr_date.second}.png')
+    img.save(f'QR_Code_{curr_date.year}-{curr_date.month}-{curr_date.day}_{curr_date.hour}-{curr_date.minute}-{curr_date.second}.png')
 
 def main():
     qr_code_generation('https://www.youtube.com/watch?v=dQw4w9WgXcQ')
