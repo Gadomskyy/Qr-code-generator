@@ -14,8 +14,8 @@ def qr_code_generation(text):
     img = qr.make_image(fill_color="black", back_color="white")
     img.save(f'QR_Code_{curr_date.year}-{curr_date.month}-{curr_date.day}_{curr_date.hour}-{curr_date.minute}-{curr_date.second}.png')
 
-def main():
-    qr_code_generation('https://www.youtube.com/watch?v=dQw4w9WgXcQ')
-
-if __name__ == "__main__":
-    main()
+# def main():
+#     qr_code_generation('https://www.youtube.com/watch?v=dQw4w9WgXcQ')
+#
+# if __name__ == "__main__":
+#     main()
