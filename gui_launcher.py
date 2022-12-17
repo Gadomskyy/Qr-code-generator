@@ -22,15 +22,15 @@ class Ui(QtWidgets.QMainWindow):
         self.convert_into_text.clicked.connect(self.make_text)
 
 
-    def save_qr(self):
+    def load_qr(self):
         response = QtWidgets.QFileDialog.getOpenFileName(parent=self,
                                                          caption='Select a file',
                                                          directory=os.getcwd(),
                                                          filter='Image file (*.png)'
                                                          )
         print(response)
-        
-    def load_qr(self):
+
+    def save_qr(self):
         pass
 
     def exit_program(self):
