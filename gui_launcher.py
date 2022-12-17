@@ -23,12 +23,15 @@ class Ui(QtWidgets.QMainWindow):
 
 
     def load_qr(self):
-        response = QtWidgets.QFileDialog.getOpenFileName(parent=self,
+        response, _ = QtWidgets.QFileDialog.getOpenFileName(parent=self,
                                                          caption='Select a file',
                                                          directory=os.getcwd(),
                                                          filter='Image file (*.png)'
                                                          )
-        print(response)
+        pixmap = QtGui.QPixmap(response)
+        pixmap = pixmap.scaled(200, 200)
+        self.qr_code_display.setScaledContents(True)
+        self.qr_code_display.setPixmap(pixmap)
 
     def save_qr(self):
         pass
