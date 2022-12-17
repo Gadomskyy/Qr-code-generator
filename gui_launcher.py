@@ -1,7 +1,6 @@
-from PyQt5 import QtWidgets, uic, QtGui,
-from PyQt5.QtGui import QPixmap
+from PyQt5 import QtWidgets, uic, QtGui
 import sys
-import qrcode_gen
+import qrcode
 
 
 class Ui(QtWidgets.QMainWindow):
@@ -26,10 +25,26 @@ class Ui(QtWidgets.QMainWindow):
         pass
 
     def exit_program(self):
-        sys.exit()
+        sys.exit(0)
 
     def make_qr(self):
-        pass
+        qr = qrcode.QRCode(
+            version=1,
+            error_correction=qrcode.constants.ERROR_CORRECT_L,
+            box_size=10,
+            border=4,
+        )
+
+        qr.add_data(self.textLine.text())
+        qr.make(fit=True)
+        img = qr.make_image(fill_color="black", back_color="white")
+        img.save('sample.png')
+        pixmap = QtGui.QPixmap('sample.png')
+        self.qr_code_display.setScaledContents(True)
+        self.qr_code_display.setPixmap(pixmap)
+
+
+
 
     def make_text(self):
         pass

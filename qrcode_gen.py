@@ -20,8 +20,7 @@ class Qrcode_gen():
         self.img = qr.make_image(fill_color="black", back_color="white")
 
     def save_img(self):
-        curr_date = datetime.now()
-        self.img.save(f'QR_Code_{curr_date.year}-{curr_date.month}-{curr_date.day}_{curr_date.hour}-{curr_date.minute}-{curr_date.second}.png')
+        self.img.save('sample.png')
 
 qr = Qrcode_gen('https://www.youtube.com/')
 qr.qr_code_generation()
