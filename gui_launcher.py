@@ -55,6 +55,7 @@ class Ui(QtWidgets.QMainWindow):
         pixmap = pixmap.scaled(200, 200)
         self.qr_code_display.setScaledContents(True)
         self.qr_code_display.setPixmap(pixmap)
+        os.remove('sample.png')
 
     def make_text(self):
         pass
