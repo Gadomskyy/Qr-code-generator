@@ -1,6 +1,8 @@
 from PyQt5 import QtWidgets, uic, QtGui
 import sys
+import os
 import qrcode
+import cv2
 
 
 class Ui(QtWidgets.QMainWindow):
@@ -19,9 +21,15 @@ class Ui(QtWidgets.QMainWindow):
         self.convert_into_QR.clicked.connect(self.make_qr)
         self.convert_into_text.clicked.connect(self.make_text)
 
-    def save_qr(self):
-        pass
 
+    def save_qr(self):
+        response = QtWidgets.QFileDialog.getOpenFileName(parent=self,
+                                                         caption='Select a file',
+                                                         directory=os.getcwd(),
+                                                         filter='Image file (*.png)'
+                                                         )
+        print(response)
+        
     def load_qr(self):
         pass
 
@@ -44,9 +52,6 @@ class Ui(QtWidgets.QMainWindow):
         pixmap = pixmap.scaled(200, 200)
         self.qr_code_display.setScaledContents(True)
         self.qr_code_display.setPixmap(pixmap)
-
-
-
 
     def make_text(self):
         pass
