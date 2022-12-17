@@ -8,6 +8,7 @@ class Ui(QtWidgets.QMainWindow):
         super(Ui, self).__init__()
         uic.loadUi('qr_code_gui.ui', self)
         self.show()
+        self.setFixedSize(712, 360)
 
         #Connecting the Save, Load, Exit options from File menu to methods
         self.actionSave.triggered.connect(self.save_qr)
@@ -31,15 +32,16 @@ class Ui(QtWidgets.QMainWindow):
         qr = qrcode.QRCode(
             version=1,
             error_correction=qrcode.constants.ERROR_CORRECT_L,
-            box_size=10,
-            border=4,
+            box_size=20,
+            border=2,
         )
 
-        qr.add_data(self.textLine.text())
+        qr.add_data(self.textLine.toPlainText())
         qr.make(fit=True)
         img = qr.make_image(fill_color="black", back_color="white")
         img.save('sample.png')
         pixmap = QtGui.QPixmap('sample.png')
+        pixmap = pixmap.scaled(200, 200)
         self.qr_code_display.setScaledContents(True)
         self.qr_code_display.setPixmap(pixmap)
 
