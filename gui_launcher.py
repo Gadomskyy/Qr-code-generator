@@ -1,5 +1,8 @@
-from PyQt5 import QtWidgets, uic
+from PyQt5 import QtWidgets, uic, QtGui,
+from PyQt5.QtGui import QPixmap
 import sys
+import qrcode_gen
+
 
 class Ui(QtWidgets.QMainWindow):
     def __init__(self):
