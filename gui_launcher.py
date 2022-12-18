@@ -38,17 +38,20 @@ class Ui(QtWidgets.QMainWindow):
         self.textLine.clear()
 
     def save_qr(self):
+        #opens file save window
         options = QtWidgets.QFileDialog.Options()
         filename, _ = QtWidgets.QFileDialog.getSaveFileName(parent=self,
                                                          caption='Save a file',
                                                          directory=os.getcwd(),
                                                          )
+        #Saves the image from the display as png
         if filename != '':
             img = self.qr_code_display.pixmap()
             img.save(f'{filename}.png')
 
 
     def exit_program(self):
+        #Creates a message box confirming if the user wants to quit when using Exit button
         msg = QtWidgets.QMessageBox()
         msg.setWindowTitle('Exit the program?')
         msg.setText('Are you sure you want to quit?')
