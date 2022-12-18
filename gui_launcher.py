@@ -38,7 +38,15 @@ class Ui(QtWidgets.QMainWindow):
         self.textLine.clear()
 
     def save_qr(self):
-        pass
+        options = QtWidgets.QFileDialog.Options()
+        filename, _ = QtWidgets.QFileDialog.getSaveFileName(parent=self,
+                                                         caption='Save a file',
+                                                         directory=os.getcwd(),
+                                                         )
+        if filename != '':
+            img = self.qr_code_display.pixmap()
+            img.save(f'{filename}.png')
+
 
     def exit_program(self):
         msg = QtWidgets.QMessageBox()
@@ -53,6 +61,7 @@ class Ui(QtWidgets.QMainWindow):
             sys.exit(0)
         else:
             pass
+
 
     def make_qr(self):
         #creates QR object
