@@ -41,7 +41,18 @@ class Ui(QtWidgets.QMainWindow):
         pass
 
     def exit_program(self):
-        sys.exit(0)
+        msg = QtWidgets.QMessageBox()
+        msg.setWindowTitle('Exit the program?')
+        msg.setText('Are you sure you want to quit?')
+        msg.setIcon(QtWidgets.QMessageBox.Question)
+        msg.setStandardButtons(QtWidgets.QMessageBox.Yes|QtWidgets.QMessageBox.No)
+        msg.setDefaultButton(QtWidgets.QMessageBox.Yes)
+
+        x = msg.exec_()
+        if x == QtWidgets.QMessageBox.Yes:
+            sys.exit(0)
+        else:
+            pass
 
     def make_qr(self):
         #creates QR object
