@@ -23,15 +23,19 @@ class Ui(QtWidgets.QMainWindow):
 
 
     def load_qr(self):
+        #opens file selection window
         response, _ = QtWidgets.QFileDialog.getOpenFileName(parent=self,
                                                          caption='Select a file',
                                                          directory=os.getcwd(),
                                                          filter='Image file (*.png)'
                                                          )
+        #Creates image of loaded file
         pixmap = QtGui.QPixmap(response)
         pixmap = pixmap.scaled(200, 200)
         self.qr_code_display.setScaledContents(True)
         self.qr_code_display.setPixmap(pixmap)
+        #Clears the input line after loading file to avoid confusion
+        self.textLine.clear()
 
     def save_qr(self):
         pass
@@ -40,6 +44,7 @@ class Ui(QtWidgets.QMainWindow):
         sys.exit(0)
 
     def make_qr(self):
+        #creates QR object
         qr = qrcode.QRCode(
             version=1,
             error_correction=qrcode.constants.ERROR_CORRECT_L,
@@ -47,14 +52,17 @@ class Ui(QtWidgets.QMainWindow):
             border=2,
         )
 
+        #adds data from input file into qr object
         qr.add_data(self.textLine.toPlainText())
         qr.make(fit=True)
         img = qr.make_image(fill_color="black", back_color="white")
         img.save('sample.png')
+        #loads created qr code
         pixmap = QtGui.QPixmap('sample.png')
         pixmap = pixmap.scaled(200, 200)
         self.qr_code_display.setScaledContents(True)
         self.qr_code_display.setPixmap(pixmap)
+        #removes created qr code after loading it to avoid unwanted files
         os.remove('sample.png')
 
     def make_text(self):
