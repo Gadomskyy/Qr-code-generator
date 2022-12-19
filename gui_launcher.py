@@ -19,7 +19,7 @@ class Ui(QtWidgets.QMainWindow):
 
         #Connecting the push buttons to menus
         self.convert_into_QR.clicked.connect(self.make_qr)
-        self.convert_into_text.clicked.connect(self.make_text)
+        self.convert_into_text.clicked.connect(self.read_qr)
 
 
     def load_qr(self):
@@ -88,8 +88,16 @@ class Ui(QtWidgets.QMainWindow):
         #removes created qr code after loading it to avoid unwanted files
         os.remove('sample.png')
 
-    def make_text(self):
-        pass
+    def read_qr(self):
+        current_img = self.qr_code_display.pixmap()
+        current_img.save('temporaryforload.png')
+        self.currentfile = os.path.abspath('temporaryforload.png')
+        img = cv2.imread(self.currentfile)
+        detect = cv2.QRCodeDetector()
+        data, _, _ = detect.detectAndDecode(img)
+        self.textLine.setText(data)
+        #is there a way to do it without dummy files?
+        os.remove('temporaryforload.png')
 
 app = QtWidgets.QApplication(sys.argv)
 window = Ui()
