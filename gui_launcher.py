@@ -95,10 +95,23 @@ class Ui(QtWidgets.QMainWindow):
         img = cv2.imread(self.currentfile)
         detect = cv2.QRCodeDetector()
         data, _, _ = detect.detectAndDecode(img)
+        #if we cant decode QR code, throw a popup message
+        if not data:
+            err_msg = QtWidgets.QMessageBox()
+            err_msg.setWindowTitle('QR code not recognized')
+            err_msg.setText("Not able to detect the QR code. Please make sure the loaded image is correct and try again.")
+            err_msg.setIcon(QtWidgets.QMessageBox.Warning)
+            err_msg.setStandardButtons(QtWidgets.QMessageBox.Ok)
+
+            x = err_msg.exec_()
+
         self.textLine.setText(data)
         #is there a way to do it without dummy files?
         os.remove('temporaryforload.png')
+        #TODO: implement a warning when file is not recognizable
 
+
+#TODO: make an .exe file of the program
 app = QtWidgets.QApplication(sys.argv)
 window = Ui()
 app.exec_()
